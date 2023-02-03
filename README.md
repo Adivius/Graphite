@@ -3,8 +3,6 @@
 Java library for drawing. Uses 2DGraphics 
 to draw 2d-sprites on a JFrame
 
-![Screenshot](https://github.com/Adivius/Graphite/blob/main/Screenshot.png?raw=true)
-
 ## Description
 Grapite is a simple library to draw 2d graphics on your screen in Java.
 It uses a JFrame (JPanel) and its graphics to draw shapes and texts to 
@@ -17,10 +15,12 @@ create simple graphics. <br>
     - Use the functions of the pen to draw on the screen
     - Get keyboard and mouse input from the screen
 
-
-## TODO:
+## TODO
     - Add release as lib
     - Better write function
     - More fonts
     - A way to edit font & font styles
     - Image loader
+
+## Screenshots
+![Screenshot.png](https://github.com/Adivius/Graphite/blob/main/Screenshot.png)
