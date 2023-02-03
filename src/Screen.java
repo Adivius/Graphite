@@ -50,14 +50,13 @@ public class Screen extends JFrame {
         this.panel.requestFocus();
     }
 
-    public void sleep(int milliSeconds) {
-        try {
-            Thread.sleep(milliSeconds);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-
+    public void init2DGraphics() {
+        Graphics2D g2d = (Graphics2D) this.getGraphicsFromPanel();
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
+        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
+        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2d.setComposite(AlphaComposite.getInstance(3, 1.0F));
     }
 
     public Graphics getGraphicsFromPanel() {
@@ -93,15 +92,6 @@ public class Screen extends JFrame {
         this.exitProgram();
     }
 
-    public void init2DGraphics() {
-        Graphics2D g2d = (Graphics2D) this.getGraphicsFromPanel();
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
-        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
-        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2d.setComposite(AlphaComposite.getInstance(3, 1.0F));
-    }
-
     public void changeWindowSize() {
         this.changeSize(this.panel.getVisibleRect().width, this.panel.getVisibleRect().height);
 
@@ -118,6 +108,36 @@ public class Screen extends JFrame {
 
     public JPanel getPanel() {
         return this.panel;
+    }
+
+    public boolean isKeyboardPressed() {
+        this.sleep(10);
+        return cKeyboardPressed;
+    }
+
+    public boolean isMousePressed() {
+        this.sleep(10);
+        return cMousePressed;
+    }
+
+    public int getMouseXPos() {
+        this.sleep(10);
+        return cMouseXPos;
+    }
+
+    public int getMouseYPos() {
+        this.sleep(10);
+        return cMouseYPos;
+    }
+
+    public void sleep(int milliSeconds) {
+        try {
+            Thread.sleep(milliSeconds);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+
     }
 
     public class ListenerKeyboard extends KeyAdapter {
