@@ -1,10 +1,6 @@
 # Graphite  
 
-Java library for drawing. Uses 2DGraphics 
-to draw 2d-sprites on a JFrame
-
-## Description
-Grapite is a simple library to draw 2d graphics on your screen in Java.
+Graphite is a simple library to draw 2d graphics on your screen in Java.
 It uses a JFrame (JPanel) and its graphics to draw shapes and texts to 
 create simple graphics. <br>
 (Inspired by the [__SuM__](https://www.mg-werl.de/sum/) library.)
