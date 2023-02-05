@@ -7,7 +7,6 @@ import java.awt.event.MouseEvent;
 
 public class Screen extends JFrame {
 
-
     public final JPanel panel;
     public int cKeyId;
     public boolean cKeyboardPressed;
@@ -16,6 +15,8 @@ public class Screen extends JFrame {
     public int cMouseYPos;
     public int cHeight;
     public int cWidth;
+    ListenerKeyboard listenerKeyboard;
+    ListenerMouse listenerMouse;
 
     public Screen(int width, int height, String title) {
         super(title);
@@ -23,9 +24,7 @@ public class Screen extends JFrame {
         this.cWidth = 0;
         this.panel = (JPanel) this.getContentPane();
         this.panel.setLayout(null);
-        this.panel.addKeyListener(new ListenerKeyboard());
-        this.panel.addMouseListener(new ListenerMouse());
-        this.panel.addMouseMotionListener(new ListenerMouse());
+        initListeners();
         this.panel.setOpaque(true);
 
 
@@ -48,6 +47,14 @@ public class Screen extends JFrame {
         this.sleep(500);
         this.setLocationRelativeTo(null);
         this.panel.requestFocus();
+    }
+
+    public void initListeners() {
+        this.listenerKeyboard = new ListenerKeyboard();
+        this.listenerMouse = new ListenerMouse();
+        this.panel.addKeyListener(this.listenerKeyboard);
+        this.panel.addMouseListener(this.listenerMouse);
+        this.panel.addMouseMotionListener(this.listenerMouse);
     }
 
     public void init2DGraphics() {
