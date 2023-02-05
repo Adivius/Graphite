@@ -117,23 +117,23 @@ public class Screen extends JFrame {
         return this.panel;
     }
 
+    public int getKeyId() {
+        return cKeyId;
+    }
+
     public boolean isKeyboardPressed() {
-        this.sleep(10);
         return cKeyboardPressed;
     }
 
     public boolean isMousePressed() {
-        this.sleep(10);
         return cMousePressed;
     }
 
     public int getMouseXPos() {
-        this.sleep(10);
         return cMouseXPos;
     }
 
     public int getMouseYPos() {
-        this.sleep(10);
         return cMouseYPos;
     }
 
