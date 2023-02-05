@@ -1,7 +1,4 @@
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 public class EventScreen extends Screen {
 
@@ -19,6 +16,7 @@ public class EventScreen extends Screen {
         this.panel.addKeyListener(this.listenerKeyboardEdit);
         this.panel.addMouseListener(this.listenerMouseEdit);
         this.panel.addMouseMotionListener(this.listenerMouseEdit);
+        this.panel.addMouseWheelListener(this.listenerMouseEdit);
     }
 
     public void editKeyPressed(KeyEvent e) {
@@ -58,6 +56,10 @@ public class EventScreen extends Screen {
     }
 
     public void editMouseDragged(MouseEvent e) {
+
+    }
+
+    public void editMouseWheelMoved(MouseWheelEvent e) {
 
     }
 
@@ -122,6 +124,12 @@ public class EventScreen extends Screen {
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
             EventScreen.this.editMouseClicked(e);
+        }
+
+        @Override
+        public void mouseWheelMoved(MouseWheelEvent e) {
+            super.mouseWheelMoved(e);
+            EventScreen.this.editMouseWheelMoved(e);
         }
     }
 
