@@ -18,6 +18,7 @@ public class Pen {
     public Graphics2D g2d;
     public int cPaintMode;
     public int cThickness;
+    public boolean cFillMode;
 
     public Pen(Screen screen) {
         this.screen = screen;
@@ -30,6 +31,7 @@ public class Pen {
         this.xPos = 0;
         this.yPos = 0;
         this.cDrawing = false;
+        this.cFillMode = false;
         this.cAngle = 0;
         this.cThickness = 1;
     }
@@ -42,7 +44,7 @@ public class Pen {
     }
 
     public void drawLine(int x1, int y1, int x2, int y2) {
-        g2d.draw(new Line2D.Double(x1, y1, x2, y2));
+        this.draw(new Line2D.Double(x1, y1, x2, y2));
     }
 
     public void drawTriangle(int length) {
@@ -56,19 +58,27 @@ public class Pen {
     }
 
     public void drawCircle(int radius) {
-        g2d.draw(new Ellipse2D.Double(this.xPos - radius, this.yPos - radius, 2.0 * radius, 2.0 * radius));
+        this.draw(new Ellipse2D.Double(this.xPos - radius, this.yPos - radius, 2.0 * radius, 2.0 * radius));
     }
 
     public void drawArc(int width, int height, int startAngle, int endAngle, int mode) {
-        g2d.draw(new Arc2D.Double(this.xPos, this.yPos, width, height, startAngle, endAngle, mode));
+        this.draw(new Arc2D.Double(this.xPos, this.yPos, width, height, startAngle, endAngle, mode));
     }
 
     public void drawRectangle(int width, int height, int arch) {
-        g2d.draw(new RoundRectangle2D.Double(this.xPos, this.yPos, width, height, arch, arch));
+        this.draw(new RoundRectangle2D.Double(this.xPos, this.yPos, width, height, arch, arch));
     }
 
     public void drawRectangle(int width, int height) {
         this.drawRectangle(width, height, 0);
+    }
+
+    public void draw(Shape shape) {
+        if (this.cFillMode) {
+            g2d.fill(shape);
+        } else {
+            g2d.draw(shape);
+        }
     }
 
     public void write(String text) {
@@ -167,6 +177,14 @@ public class Pen {
 
     public int getYPos() {
         return yPos;
+    }
+
+    public boolean getFillMode() {
+        return this.cFillMode;
+    }
+
+    public void setFillMode(boolean fillMode) {
+        this.cFillMode = fillMode;
     }
 
 }

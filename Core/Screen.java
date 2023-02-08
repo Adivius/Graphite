@@ -7,7 +7,9 @@ import java.awt.event.MouseEvent;
 
 public class Screen extends JFrame {
 
-    public final JPanel panel;
+    public JPanel panel;
+    public Image image;
+
     public int cKeyId;
     public boolean cKeyboardPressed;
     public boolean cMousePressed;
@@ -15,6 +17,7 @@ public class Screen extends JFrame {
     public int cMouseYPos;
     public int cHeight;
     public int cWidth;
+
     ListenerKeyboard listenerKeyboard;
     ListenerMouse listenerMouse;
 
@@ -41,6 +44,7 @@ public class Screen extends JFrame {
         this.setFocusable(true);
         this.changeWindowSize();
         this.setSize(this.getWidth() - this.cWidth + width, this.getHeight() - this.cHeight + height);
+        this.image = this.createImage(this.getSize().width, this.getSize().height);
 
         this.init2DGraphics();
         this.setBackgroundColor(Color.WHITE);
@@ -145,6 +149,10 @@ public class Screen extends JFrame {
             e.printStackTrace();
         }
 
+    }
+
+    public Graphics2D getGraphics2D() {
+        return (Graphics2D) getGraphicsFromPanel();
     }
 
     public class ListenerKeyboard extends KeyAdapter {
