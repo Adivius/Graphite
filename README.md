@@ -12,7 +12,6 @@ create simple graphics. <br>
     - Get keyboard and mouse input from the screen
 
 ## TODO
-    - Add release as lib
     - Better write function
     - More fonts
     - A way to edit font & font styles
