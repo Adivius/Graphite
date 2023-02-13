@@ -7,7 +7,7 @@ create simple graphics. <br>
 
 ## Usage
     - Create a Screen in your project with width, height and title
-    - Create a Pen and link it to the sceen
+    - Create a Pen and link it to the screen
     - Use the functions of the pen to draw on the screen
     - Get keyboard and mouse input from the screen
 
