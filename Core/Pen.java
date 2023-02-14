@@ -11,10 +11,10 @@ public class Pen {
     public static final int ARC_OPEN = Arc2D.OPEN, ARC_PIE = Arc2D.PIE, ARC_CHORD = Arc2D.CHORD;
 
     public final Screen screen;
-    public int xPos;
-    public int yPos;
+    public float xPos;
+    public float yPos;
     public boolean cDrawing;
-    public int cAngle;
+    public float cAngle;
     public Graphics2D g2d;
     public int cPaintMode;
     public int cThickness;
@@ -43,11 +43,11 @@ public class Pen {
         g2d = graphics2D;
     }
 
-    public void drawLine(int x1, int y1, int x2, int y2) {
+    public void drawLine(float x1, float y1, float x2, float y2) {
         this.draw(new Line2D.Double(x1, y1, x2, y2));
     }
 
-    public void drawTriangle(int length) {
+    public void drawTriangle(float length) {
         boolean temp = this.cDrawing;
         this.down();
         for (int i = 0; i < 3; i++) {
@@ -57,19 +57,19 @@ public class Pen {
         this.cDrawing = temp;
     }
 
-    public void drawCircle(int radius) {
+    public void drawCircle(float radius) {
         this.draw(new Ellipse2D.Double(this.xPos - radius, this.yPos - radius, 2.0 * radius, 2.0 * radius));
     }
 
-    public void drawArc(int width, int height, int startAngle, int endAngle, int mode) {
+    public void drawArc(float width, float height, float startAngle, float endAngle, int mode) {
         this.draw(new Arc2D.Double(this.xPos, this.yPos, width, height, startAngle, endAngle, mode));
     }
 
-    public void drawRectangle(int width, int height, int arch) {
+    public void drawRectangle(float width, float height, float arch) {
         this.draw(new RoundRectangle2D.Double(this.xPos, this.yPos, width, height, arch, arch));
     }
 
-    public void drawRectangle(int width, int height) {
+    public void drawRectangle(float width, float height) {
         this.drawRectangle(width, height, 0);
     }
 
@@ -85,7 +85,7 @@ public class Pen {
         g2d.drawString(text, this.xPos, this.yPos);
     }
 
-    public void rotateBy(int angle) {
+    public void rotateBy(float angle) {
         this.setAngle(this.cAngle + angle);
     }
 
@@ -97,14 +97,14 @@ public class Pen {
         this.moveTo(screen.cMouseXPos, screen.cMouseYPos);
     }
 
-    public void moveBy(int distance) {
+    public void moveBy(float distance) {
         double a = this.cAngle * Math.PI / 180.0;
         double x = this.xPos + distance * Math.cos(a);
         double y = this.yPos - distance * Math.sin(a);
-        this.moveTo((int) x, (int) y);
+        this.moveTo( (float) x, (float) y);
     }
 
-    public void moveTo(int x, int y) {
+    public void moveTo(float x, float y) {
         if (this.cDrawing) {
             drawLine(xPos, yPos, x, y);
         }
@@ -163,19 +163,19 @@ public class Pen {
         this.setColor(screen.getBackgroundColor());
     }
 
-    public int getAngle() {
+    public float getAngle() {
         return cAngle;
     }
 
-    public void setAngle(int cAngle) {
+    public void setAngle(float cAngle) {
         this.cAngle = cAngle % 360;
     }
 
-    public int getXPos() {
+    public float getXPos() {
         return xPos;
     }
 
-    public int getYPos() {
+    public float getYPos() {
         return yPos;
     }
 

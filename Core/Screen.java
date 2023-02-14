@@ -142,13 +142,16 @@ public class Screen extends JFrame {
     }
 
     public void sleep(int milliSeconds) {
+        this.sleep(milliSeconds, 0);
+    }
+
+    public void sleep(int milliSeconds, int nanoSeconds) {
         try {
-            Thread.sleep(milliSeconds);
+            Thread.sleep(milliSeconds, nanoSeconds);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
-
     }
 
     public Graphics2D getGraphics2D() {
