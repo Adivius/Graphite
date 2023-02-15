@@ -10,15 +10,15 @@ public class Pen {
     public static final int ROTATION_RIGHT = -90, ROTATION_LEFT = 90, ROTATION_AROUND = 180;
     public static final int ARC_OPEN = Arc2D.OPEN, ARC_PIE = Arc2D.PIE, ARC_CHORD = Arc2D.CHORD;
 
-    public final Screen screen;
-    public float xPos;
-    public float yPos;
-    public boolean cDrawing;
-    public float cAngle;
-    public Graphics2D g2d;
-    public int cPaintMode;
-    public int cThickness;
-    public boolean cFillMode;
+    private final Screen screen;
+    private float xPos;
+    private float yPos;
+    private boolean cDrawing;
+    private float cAngle;
+    private Graphics2D g2d;
+    private int cPaintMode;
+    private float cThickness;
+    private boolean cFillMode;
 
     public Pen(Screen screen) {
         this.screen = screen;
@@ -28,12 +28,12 @@ public class Pen {
 
     public void resetToDefault() {
         this.cPaintMode = 0;
-        this.xPos = 0;
-        this.yPos = 0;
+        this.xPos = 0.0f;
+        this.yPos = 0.0f;
         this.cDrawing = false;
         this.cFillMode = false;
-        this.cAngle = 0;
-        this.cThickness = 1;
+        this.cAngle = 0.0f;
+        this.cThickness = 1.0f;
     }
 
     public void init2DGraphics() {
@@ -73,7 +73,7 @@ public class Pen {
         this.drawRectangle(width, height, 0);
     }
 
-    public void draw(Shape shape) {
+    private void draw(Shape shape) {
         if (this.cFillMode) {
             g2d.fill(shape);
         } else {
@@ -98,10 +98,10 @@ public class Pen {
     }
 
     public void moveBy(float distance) {
-        double a = this.cAngle * Math.PI / 180.0;
-        double x = this.xPos + distance * Math.cos(a);
-        double y = this.yPos - distance * Math.sin(a);
-        this.moveTo( (float) x, (float) y);
+        float a = this.cAngle * (float) Math.PI / 180.0f;
+        float x = this.xPos + distance * (float) Math.cos(a);
+        float y = this.yPos - distance * (float) Math.sin(a);
+        this.moveTo(x, y);
     }
 
     public void moveTo(float x, float y) {
@@ -120,7 +120,7 @@ public class Pen {
         this.cDrawing = false;
     }
 
-    public int getThickness() {
+    public float getThickness() {
         return cThickness;
     }
 
@@ -185,6 +185,10 @@ public class Pen {
 
     public void setFillMode(boolean fillMode) {
         this.cFillMode = fillMode;
+    }
+
+    public Screen getScreen() {
+        return this.screen;
     }
 
 }

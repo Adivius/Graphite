@@ -9,6 +9,10 @@ public class EventScreen extends Screen {
         super(width, height, title);
     }
 
+    public EventScreen(String title){
+        super(title);
+    }
+
     @Override
     public void initListeners() {
         this.listenerKeyboardEdit = new ListenerKeyboardEdit();

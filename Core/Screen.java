@@ -15,42 +15,36 @@ public class Screen extends JFrame {
     public boolean cMousePressed;
     public int cMouseXPos;
     public int cMouseYPos;
-    public int cHeight;
-    public int cWidth;
 
     ListenerKeyboard listenerKeyboard;
     ListenerMouse listenerMouse;
 
     public Screen(int width, int height, String title) {
         super(title);
-        this.cHeight = 0;
-        this.cWidth = 0;
         this.panel = (JPanel) this.getContentPane();
         this.panel.setLayout(null);
-        initListeners();
         this.panel.setOpaque(true);
+        initListeners();
 
-
-        if (width == -1) {
-            Dimension dimension = this.getToolkit().getScreenSize();
-            width = dimension.width - 20;
-            height = dimension.height - 60;
-        }
-
-        this.setBounds(0, 0, width, height);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
-        this.setVisible(true);
         this.setFocusable(true);
-        this.changeWindowSize();
-        this.setSize(this.getWidth() - this.cWidth + width, this.getHeight() - this.cHeight + height);
-        this.image = this.createImage(this.getSize().width, this.getSize().height);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setPreferredSize(new Dimension(width, height));
+        this.pack();
 
+        this.image = this.createImage(width, height);
+
+        this.setVisible(true);
         this.init2DGraphics();
         this.setBackgroundColor(Color.WHITE);
-        this.sleep(500);
         this.setLocationRelativeTo(null);
         this.panel.requestFocus();
+    }
+
+    public Screen(String title){
+        this(1, 1, title);
+        Dimension dimension = this.getToolkit().getScreenSize();
+        this.changeSize(dimension.width - 20, dimension.height - 60);
     }
 
     public void initListeners() {
@@ -67,7 +61,7 @@ public class Screen extends JFrame {
         g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2d.setComposite(AlphaComposite.getInstance(3, 1.0F));
+        g2d.setComposite(AlphaComposite.Clear);
     }
 
     public Graphics getGraphicsFromPanel() {
@@ -80,9 +74,14 @@ public class Screen extends JFrame {
 
     public void setBackgroundColor(Color color) {
         this.panel.setBackground(color);
-        this.panel.getGraphics().clearRect(0, 0, this.cWidth, this.cHeight);
+        this.panel.getGraphics().clearRect(0, 0, this.getWidth(), this.getWidth());
         this.panel.paintImmediately(this.panel.getBounds());
         this.panel.validate();
+    }
+
+    public void changeSize(int width, int height){
+        this.setPreferredSize(new Dimension(width, height));
+        this.pack();
     }
 
     public void clear() {
@@ -101,16 +100,6 @@ public class Screen extends JFrame {
             this.sleep(10);
         }
         this.exitProgram();
-    }
-
-    public void changeWindowSize() {
-        this.changeSize(this.panel.getVisibleRect().width, this.panel.getVisibleRect().height);
-
-    }
-
-    public void changeSize(int x, int y) {
-        this.cWidth = x;
-        this.cHeight = y;
     }
 
     public void paint(Graphics g) {
