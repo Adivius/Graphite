@@ -124,8 +124,8 @@ public class Pen {
         return cThickness;
     }
 
-    public void setThickness(int thickness) {
-        g2d.setStroke(new BasicStroke((float) thickness, 0, 0));
+    public void setThickness(float thickness) {
+        g2d.setStroke(new BasicStroke(thickness, 0, 0));
         this.cThickness = thickness;
     }
 
