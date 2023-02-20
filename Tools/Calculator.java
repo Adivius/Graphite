@@ -44,9 +44,7 @@ public abstract class Calculator {
         return new Random().nextInt(high-low) + low;
     }
     public static int randInt(int min, int max, long seed){
-        int low = 10;
-        int high = 100;
-        return new Random(seed).nextInt(high-low) + low;
+        return new Random(seed).nextInt(max-min) + min;
     }
 
     public static boolean randBool(long seed) {
