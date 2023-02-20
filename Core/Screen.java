@@ -1,3 +1,4 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -78,7 +79,6 @@ public class Screen extends JFrame {
         this.panel.paintImmediately(this.panel.getBounds());
         this.panel.validate();
     }
-
     public void changeSize(int width, int height){
         this.setPreferredSize(new Dimension(width, height));
         this.pack();

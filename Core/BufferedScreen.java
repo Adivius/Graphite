@@ -33,5 +33,11 @@ public class BufferedScreen extends EventScreen {
         this.panel.getGraphics().drawImage(this.image, this.panel.getX(), this.panel.getY(), this.panel);
     }
 
+    @Override
+    public void changeSize(int width, int height){
+        super.changeSize(width, height);
+        this.redraw();
+    }
+
 }
 

@@ -14,7 +14,7 @@ public class Pen {
     private float xPos;
     private float yPos;
     private boolean cDrawing;
-    private float cAngle;
+    private float cRotation;
     private Graphics2D g2d;
     private int cPaintMode;
     private float cThickness;
@@ -32,7 +32,7 @@ public class Pen {
         this.yPos = 0.0f;
         this.cDrawing = false;
         this.cFillMode = false;
-        this.cAngle = 0.0f;
+        this.cRotation = 0.0f;
         this.cThickness = 1.0f;
     }
 
@@ -61,8 +61,8 @@ public class Pen {
         this.draw(new Ellipse2D.Double(this.xPos - radius, this.yPos - radius, 2.0 * radius, 2.0 * radius));
     }
 
-    public void drawArc(float width, float height, float startAngle, float endAngle, int mode) {
-        this.draw(new Arc2D.Double(this.xPos, this.yPos, width, height, startAngle, endAngle, mode));
+    public void drawArc(float width, float height, float startRotation, float endRotation, int mode) {
+        this.draw(new Arc2D.Double(this.xPos, this.yPos, width, height, startRotation, endRotation, mode));
     }
 
     public void drawRectangle(float width, float height, float arch) {
@@ -85,8 +85,8 @@ public class Pen {
         g2d.drawString(text, this.xPos, this.yPos);
     }
 
-    public void rotateBy(float angle) {
-        this.setAngle(this.cAngle + angle);
+    public void rotateBy(float rotation) {
+        this.setRotation(this.cRotation + rotation);
     }
 
     public void rotate() {
@@ -97,8 +97,43 @@ public class Pen {
         this.moveTo(screen.cMouseXPos, screen.cMouseYPos);
     }
 
+    public void rotateTo(float x, float y) {
+        if (x != this.xPos || y != this.yPos) {
+            if (x == this.xPos) {
+                if (y > this.yPos) {
+                    this.cRotation = 270.0f;
+                } else {
+                    this.cRotation = 90.0f;
+                }
+            } else if (y == this.yPos) {
+                if (x > this.xPos) {
+                    this.cRotation = 0.0f;
+                } else {
+                    this.cRotation = 180.0f;
+                }
+            } else if (x > this.xPos) {
+                this.cRotation = (float) Math.atan((y - this.yPos) / (this.xPos - x)) * 180.0f / (float) Math.PI;
+            } else {
+                this.cRotation = (float) Math.atan((y - this.yPos) / (this.xPos - x)) * 180.0f / (float) Math.PI + 180.0f;
+            }
+        }
+
+        while(this.cRotation < 0.0) {
+            this.cRotation += 360.0;
+        }
+
+        while(this.cRotation >= 720.0) {
+            this.cRotation -= 360.0;
+        }
+
+    }
+
+    public void rotateToMousePos(){
+        this.rotateTo(screen.cMouseXPos, screen.cMouseYPos);
+    }
+
     public void moveBy(float distance) {
-        float a = this.cAngle * (float) Math.PI / 180.0f;
+        float a = this.cRotation * (float) Math.PI / 180.0f;
         float x = this.xPos + distance * (float) Math.cos(a);
         float y = this.yPos - distance * (float) Math.sin(a);
         this.moveTo(x, y);
@@ -163,12 +198,12 @@ public class Pen {
         this.setColor(screen.getBackgroundColor());
     }
 
-    public float getAngle() {
-        return cAngle;
+    public float getRotation() {
+        return cRotation;
     }
 
-    public void setAngle(float cAngle) {
-        this.cAngle = cAngle % 360;
+    public void setRotation(float cRotation) {
+        this.cRotation = cRotation % 360;
     }
 
     public float getXPos() {
