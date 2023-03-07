@@ -200,7 +200,7 @@ public class Pen {
         return cPaintMode;
     }
 
-    public void setColorBackground() {
+    public void setColorToBackground() {
         this.setColor(screen.getBackgroundColor());
     }
 

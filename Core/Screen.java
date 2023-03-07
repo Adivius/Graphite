@@ -113,10 +113,6 @@ public class Screen extends JFrame {
         }
     }
 
-    public JPanel getPanel() {
-        return this.panel;
-    }
-
     public int getKeyId() {
         return cKeyId;
     }
