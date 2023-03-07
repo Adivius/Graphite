@@ -1,4 +1,3 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -42,7 +41,7 @@ public class Screen extends JFrame {
         this.panel.requestFocus();
     }
 
-    public Screen(String title){
+    public Screen(String title) {
         this(1, 1, title);
         Dimension dimension = this.getToolkit().getScreenSize();
         this.changeSize(dimension.width - 20, dimension.height - 60);
@@ -66,7 +65,7 @@ public class Screen extends JFrame {
     }
 
     public Graphics getGraphicsFromPanel() {
-        return this.panel.getGraphics();
+        return this.image.getGraphics();
     }
 
     public Color getBackgroundColor() {
@@ -74,12 +73,12 @@ public class Screen extends JFrame {
     }
 
     public void setBackgroundColor(Color color) {
-        this.panel.setBackground(color);
-        this.panel.getGraphics().clearRect(0, 0, this.getWidth(), this.getWidth());
-        this.panel.paintImmediately(this.panel.getBounds());
+        this.getGraphics2D().setBackground(color);
+        this.getGraphics2D().clearRect(0, 0, this.getWidth(), this.getHeight());
         this.panel.validate();
     }
-    public void changeSize(int width, int height){
+
+    public void changeSize(int width, int height) {
         this.setPreferredSize(new Dimension(width, height));
         this.pack();
     }
@@ -102,8 +101,16 @@ public class Screen extends JFrame {
         this.exitProgram();
     }
 
+    public void redraw() {
+        this.panel.getGraphics().drawImage(this.image, this.panel.getX(), this.panel.getY(), this.panel);
+    }
+
     public void paint(Graphics g) {
-        super.paint(g);
+        if (this.image != null) {
+            g.drawImage(this.image, this.panel.getX(), this.panel.getY(), this.panel);
+        } else {
+            super.paint(g);
+        }
     }
 
     public JPanel getPanel() {
@@ -113,6 +120,7 @@ public class Screen extends JFrame {
     public int getKeyId() {
         return cKeyId;
     }
+
 
     public boolean isKeyboardPressed() {
         return cKeyboardPressed;
