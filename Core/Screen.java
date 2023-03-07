@@ -84,7 +84,8 @@ public class Screen extends JFrame {
     }
 
     public void clear() {
-        this.repaint();
+        this.setBackgroundColor(this.getBackgroundColor());
+        this.redraw();
     }
 
     public void exitProgram() {
