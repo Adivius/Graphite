@@ -48,13 +48,15 @@ public class Pen {
     }
 
     public void drawTriangle(float length) {
-        boolean temp = this.cDrawing;
-        this.down();
-        for (int i = 0; i < 3; i++) {
-            this.moveBy(length);
-            this.rotateBy(-120);
+        int[] x = {(int) this.xPos, (int) length / 2, (int) this.xPos + (int) length};
+        int[] y = {(int) this.yPos, (int) this.yPos + (int) length, (int) this.yPos};
+        this.draw(new Polygon(x, y, 3));
+        Polygon polygon = new Polygon(x, y, 3);
+        if (this.cFillMode) {
+            g2d.fillPolygon(polygon);
+        } else {
+            g2d.drawPolygon(polygon);
         }
-        this.cDrawing = temp;
     }
 
     public void drawCircle(float radius) {
@@ -118,17 +120,17 @@ public class Pen {
             }
         }
 
-        while(this.cRotation < 0.0) {
+        while (this.cRotation < 0.0) {
             this.cRotation += 360.0;
         }
 
-        while(this.cRotation >= 720.0) {
+        while (this.cRotation >= 720.0) {
             this.cRotation -= 360.0;
         }
 
     }
 
-    public void rotateToMousePos(){
+    public void rotateToMousePos() {
         this.rotateTo(screen.cMouseXPos, screen.cMouseYPos);
     }
 
@@ -155,12 +157,16 @@ public class Pen {
         this.cDrawing = false;
     }
 
+    public boolean isDrawing() {
+        return this.cDrawing;
+    }
+
     public float getThickness() {
         return cThickness;
     }
 
     public void setThickness(float thickness) {
-        g2d.setStroke(new BasicStroke(thickness, 0, 0));
+        g2d.setStroke(new BasicStroke(thickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
         this.cThickness = thickness;
     }
 

@@ -5,24 +5,12 @@ public class Clock {
     private long timerStart;
     private long timerStop;
 
-    public Clock(){
+    public Clock() {
         this.timerStart = 0L;
         this.timerStop = 0L;
     }
 
-    public void timerStart(){
-        this.timerStart = System.currentTimeMillis();
-    }
-
-    public void  timerStop(){
-        this.timerStop = System.currentTimeMillis();
-    }
-
-    public long getTimer(){
-        return this.timerStop - this.timerStart;
-    }
-
-    public static void delay(long  ms, int ns){
+    public static void delay(long ms, int ns) {
         try {
             Thread.sleep(ms, ns);
         } catch (InterruptedException e) {
@@ -30,18 +18,31 @@ public class Clock {
         }
     }
 
-    public static void delay(long ms){
+    public static void delay(long ms) {
         delay(ms, 0);
     }
 
-    public static String formatDate(long millis, String pattern){
+    public static String formatDate(long millis, String pattern) {
         return new SimpleDateFormat(pattern).format(millis);
     }
 
-    public static String getDate(){
+    public static String getDate() {
         return formatDate(System.currentTimeMillis(), "dd.MM.yyy");
     }
-    public static String getTime(){
+
+    public static String getTime() {
         return formatDate(System.currentTimeMillis(), "HH:mm");
+    }
+
+    public void timerStart() {
+        this.timerStart = System.currentTimeMillis();
+    }
+
+    public void timerStop() {
+        this.timerStop = System.currentTimeMillis();
+    }
+
+    public long getTimer() {
+        return this.timerStop - this.timerStart;
     }
 }
