@@ -105,3 +105,6 @@ screen.exitProgram();
 
 ## Screenshots
 ![Screenshot.png](https://github.com/Adivius/Graphite/blob/main/Screenshot.png)
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
