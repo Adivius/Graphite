@@ -39,9 +39,7 @@ public abstract class Calculator {
     }
 
     public static int randInt(int min, int max) {
-        int low = 10;
-        int high = 100;
-        return new Random().nextInt(high - low) + low;
+        return new Random().nextInt(max - min) + min;
     }
 
     public static int randInt(int min, int max, long seed) {

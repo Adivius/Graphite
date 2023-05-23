@@ -31,7 +31,7 @@ public class Clock {
     }
 
     public static String getTime() {
-        return formatDate(System.currentTimeMillis(), "HH:mm");
+        return formatDate(System.currentTimeMillis(), "HH:mm:ss");
     }
 
     public void timerStart() {
