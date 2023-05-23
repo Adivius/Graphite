@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 
 public class Client {
@@ -16,10 +14,11 @@ public class Client {
 
     public void connect() throws IOException {
         this.socket = new Socket(this.ip, this.port);
+
         Logg.log("Connected!");
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        Logg.log("Disconnected!");
         while (true){
-            Logg.log("Server: " + bufferedReader.readLine());
+            new PrintWriter(socket.getOutputStream(), true).println("Test2");
         }
     }
 
