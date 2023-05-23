@@ -85,7 +85,6 @@ public class Screen extends JFrame {
 
     public void clear() {
         this.setBackgroundColor(this.getBackgroundColor());
-        this.redraw();
     }
 
     public void exitProgram() {
@@ -93,7 +92,7 @@ public class Screen extends JFrame {
         System.exit(0);
     }
 
-    public void release() {
+    public void stopProgram() {
         this.setTitle("The program has ended!");
         this.sleep(10);
         while (!this.cKeyboardPressed) {

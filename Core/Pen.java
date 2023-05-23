@@ -232,4 +232,8 @@ public class Pen {
         return this.screen;
     }
 
+    public void redraw(){
+        this.screen.redraw();
+    }
+
 }
